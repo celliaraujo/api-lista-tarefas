@@ -22,8 +22,8 @@ public class TarefaService {
         return tarefaRepository.salvar(titulo, descricao);
     }
 
-    public Optional<Tarefa> atualizarTarefa(Long id, Tarefa tarefa){
-        return tarefaRepository.atualizar(id, tarefa);
+    public Optional<Tarefa> atualizarTarefa(Long id, String titulo, String descricao){
+        return tarefaRepository.atualizar(id, titulo, descricao);
     }
 
     public List<Tarefa> listarTarefas(){

@@ -29,11 +29,11 @@ public class TarefaRepository {
     }
 
     //atualizar tarefa
-    public Optional<Tarefa> atualizar(Long id, Tarefa tarefa){
+    public Optional<Tarefa> atualizar(Long id, String titulo, String descricao){
         if(banco.containsKey(id)){
             Tarefa encontrada = banco.get(id);
-            encontrada.alterarTitulo(tarefa.getTitulo());
-            encontrada.alterarDescricao(tarefa.getDescricao());
+            encontrada.alterarTitulo(titulo);
+            encontrada.alterarDescricao(descricao);
             return Optional.of(encontrada);
         }
         return Optional.empty();

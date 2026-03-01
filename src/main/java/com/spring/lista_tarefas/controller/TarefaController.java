@@ -3,10 +3,8 @@ package com.spring.lista_tarefas.controller;
 import com.spring.lista_tarefas.dto.CriarTarefaRequest;
 import com.spring.lista_tarefas.model.Tarefa;
 import com.spring.lista_tarefas.service.TarefaService;
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,10 +51,10 @@ public class TarefaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Tarefa> atualizar(@PathVariable Long id, Tarefa tarefa){
+    public ResponseEntity<Tarefa> atualizar(@PathVariable Long id, @RequestBody CriarTarefaRequest request){
         Optional<Tarefa> tarefaOpt = tarefaService.buscarTarefaPorId(id);
         if(tarefaOpt.isPresent()){
-            Optional<Tarefa> atualizada = tarefaService.atualizarTarefa(id, tarefa);
+            Optional<Tarefa> atualizada = tarefaService.atualizarTarefa(id, request.getTitulo(), request.getDescricao());
             return ResponseEntity.ok(atualizada.get());
         }
         return ResponseEntity.notFound().build();
